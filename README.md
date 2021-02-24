@@ -11,7 +11,13 @@ This is a normal flutter app. To get flutter set up you should follow the instru
 #### Step 1
 
 Download or clone this repo by using the link below:
+```bash
+
+```
 
 #### Step 2
 
 Go to project root and execute the following command in console to get the required dependencies:
+```bash
+flutter pub get 
+```
