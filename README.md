@@ -11,8 +11,14 @@ This is a normal flutter app. To get flutter set up you should follow the instru
 #### Step 1
 
 Download or clone this repo by using the link below:
-```bash
 
+SSH:
+```bash
+git@github.com:enriquedlh97/mascotitas_app.git
+```
+
+HTTPS:
+```bash
 ```
 
 #### Step 2
