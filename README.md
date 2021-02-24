@@ -33,6 +33,13 @@ flutter pub get
 
 The tflite models included in the assets folder were generated and gotten from this [repository](https://github.com/enriquedlh97/DogBreedClassifier)
 
+The included tflite models are the following:
+
+- b3_acc_73_9.tflite
+- b3_acc_81_3.tflite
+- b3_acc_83_7.tflite
+- b3_acc_86_7.tflite
+
 ## Author
 
 * **Enrique Díaz de León Hicks** - [enriquedlh97](https://github.com/enriquedlh97) 
