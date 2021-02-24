@@ -1,16 +1,17 @@
 # mascotitas_app
 
-A new Flutter application.
+_Final project of TI2022 - Dog Breed classifier app for local Veterinary_
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a normal flutter app. To get flutter set up you should follow the instructions in the [official documentation](https://flutter.dev/docs/get-started/install).
 
-A few resources to get you started if this is your first Flutter project:
+### Get working environment
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+#### Step 1
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Download or clone this repo by using the link below:
+
+#### Step 2
+
+Go to project root and execute the following command in console to get the required dependencies:
