@@ -19,6 +19,7 @@ git@github.com:enriquedlh97/mascotitas_app.git
 
 HTTPS:
 ```bash
+https://github.com/enriquedlh97/mascotitas_app.git
 ```
 
 #### Step 2
