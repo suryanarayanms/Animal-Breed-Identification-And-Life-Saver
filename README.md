@@ -6,7 +6,7 @@ _Final project of TI2022 - Dog Breed classifier app for local Veterinary_
 
 This is a normal flutter app. To get flutter set up you should follow the instructions in the [official documentation](https://flutter.dev/docs/get-started/install).
 
-### Get working environment
+### Installation
 
 #### Step 1
 
@@ -28,3 +28,15 @@ Go to project root and execute the following command in console to get the requi
 ```bash
 flutter pub get 
 ```
+
+### TFLite models
+
+The tflite models included in the assets folder were generated and gotten from this [repository](https://github.com/enriquedlh97/DogBreedClassifier)
+
+## Author
+
+* **Enrique Díaz de León Hicks** - [enriquedlh97](https://github.com/enriquedlh97) 
+
+## Acknowledgments 
+
+Special thanks to Aladding Persson [aladdinpersson](https://github.com/aladdinpersson) for his tutorial on [Building a Dog Breed Identifier App from scratch - DogNet](https://youtu.be/XU5rTgfnq6E)
