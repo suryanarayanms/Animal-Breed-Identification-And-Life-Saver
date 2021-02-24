@@ -29,6 +29,19 @@ Go to project root and execute the following command in console to get the requi
 flutter pub get 
 ```
 
+### Dependencies
+
+```bash
+cupertino_icons: ^1.0.2
+image_picker: ^0.6.7+14
+image: ^2.1.4
+flutter_image_compress: ^0.7.0
+tflite_flutter: ^0.5.0
+tflite_flutter_helper: ^0.1.2
+flutter_launcher_icons: ^0.8.0
+change_app_package_name: ^0.1.2
+```
+
 ### TFLite models
 
 The tflite models included in the assets folder were generated and gotten from this [repository](https://github.com/enriquedlh97/DogBreedClassifier)
