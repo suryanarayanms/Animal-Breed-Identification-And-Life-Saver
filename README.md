@@ -53,9 +53,6 @@ The included tflite models are the following:
 - b3_acc_83_7.tflite
 - b3_acc_86_7.tflite
 
-## Author
-
-* **Enrique Díaz de León Hicks** - [enriquedlh97](https://github.com/enriquedlh97) 
 
 ## Acknowledgments 
 
