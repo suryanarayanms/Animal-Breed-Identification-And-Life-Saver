@@ -4,7 +4,7 @@ _Final project of TI2022 - Dog Breed classifier app for local Veterinary_
 
 ## Getting Started
 
-This is a normal flutter app. To get flutter set up you should follow the instructions in the [official documentation](https://flutter.dev/docs/get-started/install)
+This is a normal flutter app. To get flutter set up you should follow the instructions in the [official documentation](https://flutter.dev/docs/get-started/install).
 
 ### Installation
 
