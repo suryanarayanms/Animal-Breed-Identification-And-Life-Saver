@@ -1,4 +1,4 @@
-# mascotitas_app .
+# mascotitas_app
 
 _Final project of TI2022 - Dog Breed classifier app for local Veterinary_
 
