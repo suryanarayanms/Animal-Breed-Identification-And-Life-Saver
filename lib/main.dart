@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:the_dog_project/homepage.dart';
+import 'package:flutter/services.dart';
+import 'package:the_dog_project/homepage.dart'; //For using SystemChrome
 
 void main() {
-  runApp(
-    MaterialApp(
-      title: "The Dog Project",
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.lightBlue[800],
-      ),
-    ),
-  );
+      title: "The Dog Project",
+    );
+  }
 }

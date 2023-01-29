@@ -235,7 +235,7 @@ class _BreedDetectionState extends State<BreedDetection> {
                     ? GestureDetector(
                         onTap: () async {
                           print('$dogBreed');
-                          url = "https://wikipedia.org/wiki/$dogBreed dog";
+                          url = "https://wikipedia.org/wiki/$dogBreed";
                           // if (await canLaunch(url)) {
                           launch(url,
                               forceWebView: true, enableJavaScript: true);

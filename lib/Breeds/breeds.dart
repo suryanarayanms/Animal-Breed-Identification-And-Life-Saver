@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Breeds extends StatefulWidget {
   const Breeds({Key key}) : super(key: key);
@@ -12,7 +13,7 @@ class Breeds extends StatefulWidget {
 
 class _BreedsState extends State<Breeds> {
   List<String> _breeds = [];
-
+  String url = "";
   Future<List<String>> _loadBreeds() async {
     List<String> breeds = [];
     await rootBundle.loadString('assets/labels.txt').then((q) {
@@ -85,35 +86,45 @@ class _BreedsState extends State<Breeds> {
                     return Padding(
                       padding: const EdgeInsets.only(
                           left: 10.0, top: 10, bottom: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.white),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20.0,
-                            top: 20,
-                            bottom: 20,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'assets/images/dog.png',
-                                height: 40,
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Text(_breeds[index],
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "BebasNeue",
-                                    fontSize: 35,
-                                    overflow: TextOverflow.fade,
-                                  )),
-                            ],
+                      child: GestureDetector(
+                        onTap: () async {
+                          String name = _breeds[index];
+                          url = "https://wikipedia.org/wiki/$name";
+                          // if (await canLaunch(url)) {
+                          launch(url,
+                              forceWebView: true, enableJavaScript: true);
+                          // }
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.white),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20.0,
+                              top: 20,
+                              bottom: 20,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  'assets/images/dog.png',
+                                  height: 40,
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(_breeds[index],
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                      fontSize: 35,
+                                      overflow: TextOverflow.fade,
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),
