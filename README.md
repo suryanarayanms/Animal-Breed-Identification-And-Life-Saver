@@ -1,36 +1,39 @@
-# the_dog_project
+# The Dog Project
 
-_Final year project - Dog Breed identifier_
+_Final year project - Dog Breed identifier and Dog Adoption/Geo Tracking_
 
-### Dependencies used
+
+### Dependencies used for Dog Breed Identification
 
 ```bash
-cupertino_icons: ^1.0.2
-image_picker: ^0.6.7+14
-image: ^2.1.4
-flutter_image_compress: ^0.7.0
-tflite_flutter: ^0.5.0
-tflite_flutter_helper: ^0.1.2
-flutter_launcher_icons: ^0.8.0
-change_app_package_name: ^0.1.2
+image_picker: 
+tflite_flutter:
+tflite_flutter_helper:
 ```
+
 
 ### DataSet 
 
+```bash
 The dataset used to train the model was the Stanford Dogs Dataset which contains 20,580 images with a total of 120 dog breeds.
+```
 
 
 ### TFLite models
 
+```bash
 The tflite models are the following:
 
-- b3_acc_73_9.tflite
-- b3_acc_81_3.tflite
-- b3_acc_83_7.tflite
-- b3_acc_86_7.tflite ( is used )
+b3_acc_73_9.tflite
+b3_acc_81_3.tflite
+b3_acc_83_7.tflite
+b3_acc_86_7.tflite ( is used )
+```
 
 
-### ToDo
+### ToDo's
 
-Add Pet adoption module
+```bash
+Pet adoption module
 Geo Tracking module
+```
