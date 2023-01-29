@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myapppackage.mascotitas">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="Mascotitas"
+        android:label="The Dog Project"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
