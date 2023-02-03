@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_dog_project/Breeds/breeds.dart';
-import 'package:the_dog_project/Pet%20Adoption/login.dart';
+import 'package:the_dog_project/Pet%20Adoption/login_splash.dart';
 import 'package:the_dog_project/Pet%20Detection/breed_detection.dart';
 
 class HomePage extends StatefulWidget {
@@ -144,8 +144,10 @@ class _HomePageState extends State<HomePage> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () => {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Login()))),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => LoginSplashScreen()))),
                     },
                     child: Container(
                       height: 200,

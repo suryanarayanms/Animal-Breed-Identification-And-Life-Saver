@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import '../classifier.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,7 +65,7 @@ class _BreedDetectionState extends State<BreedDetection> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      image = await picker.getImage(
+                      image = await picker.pickImage(
                           source: ImageSource.camera,
                           maxHeight: 300,
                           maxWidth: 300,
@@ -138,7 +139,7 @@ class _BreedDetectionState extends State<BreedDetection> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      image = await picker.getImage(
+                      image = await picker.pickImage(
                           source: ImageSource.gallery,
                           maxHeight: 300,
                           maxWidth: 300,

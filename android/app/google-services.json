@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "182310736208",
+    "project_id": "the-dog-project-27216",
+    "storage_bucket": "the-dog-project-27216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182310736208:android:a52b7684b2470a897b5c55",
+        "android_client_info": {
+          "package_name": "com.myapppackage.mascotitas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182310736208-blr412p9r3tljecs15pvjpceraooopin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapppackage.mascotitas",
+            "certificate_hash": "e11dd534e56e253960b7d0294dfe7cbd564a7e33"
+          }
+        },
+        {
+          "client_id": "182310736208-m1b1gp8dl740ppct2gp6ovo3fspplqv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcUBUXv9y2Ler5iYkslP5X7DvrUyi_AkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182310736208-m1b1gp8dl740ppct2gp6ovo3fspplqv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

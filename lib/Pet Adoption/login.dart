@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_dog_project/Pet%20Adoption/auth_service.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -58,35 +59,42 @@ class _LoginState extends State<Login> {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30, bottom: 30),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12), color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  top: 20,
-                  bottom: 20,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/images/google.png',
-                      height: 35,
-                    ),
-                    const Text("Continue with google",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "BebasNeue",
-                            fontSize: 30)),
-                    const Text(" ",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "BebasNeue",
-                            fontSize: 30)),
-                  ],
+            child: GestureDetector(
+              onTap: () => {
+                // context.read<TemporaryData>().retrieveData(context),
+                AuthService().signInWithGoogle(),
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20.0,
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/google.png',
+                        height: 35,
+                      ),
+                      const Text("Continue with google",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "BebasNeue",
+                              fontSize: 30)),
+                      const Text(" ",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "BebasNeue",
+                              fontSize: 30)),
+                    ],
+                  ),
                 ),
               ),
             ),
