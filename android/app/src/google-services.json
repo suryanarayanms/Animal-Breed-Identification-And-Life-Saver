@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "182310736208-blr412p9r3tljecs15pvjpceraooopin.apps.googleusercontent.com",
+          "client_id": "182310736208-e3tcaot9jeoa5lj4cbqodh6pb75macsv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.myapppackage.mascotitas",
-            "certificate_hash": "e11dd534e56e253960b7d0294dfe7cbd564a7e33"
+            "certificate_hash": "e1fac44f1e907444b5c23b67e7949c1fc2383b86"
           }
         },
         {
-          "client_id": "182310736208-m1b1gp8dl740ppct2gp6ovo3fspplqv3.apps.googleusercontent.com",
+          "client_id": "182310736208-gcpht188mf4l0dijq0rc7pgn76pue01s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "182310736208-m1b1gp8dl740ppct2gp6ovo3fspplqv3.apps.googleusercontent.com",
+              "client_id": "182310736208-gcpht188mf4l0dijq0rc7pgn76pue01s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

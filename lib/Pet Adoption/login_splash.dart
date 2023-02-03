@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:the_dog_project/Pet%20Adoption/auth_service.dart';
-import 'package:the_dog_project/Pet%20Adoption/theme.dart';
 
 class LoginSplashScreen extends StatefulWidget {
   const LoginSplashScreen({Key key}) : super(key: key);
