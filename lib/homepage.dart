@@ -144,6 +144,8 @@ class _HomePageState extends State<HomePage> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () => {
+                      // AuthService().signOut()
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(

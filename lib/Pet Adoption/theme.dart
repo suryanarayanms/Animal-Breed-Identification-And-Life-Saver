@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TemporaryData extends ChangeNotifier {
@@ -7,6 +6,8 @@ class TemporaryData extends ChangeNotifier {
 
   String _uid = "";
   String get uid => _uid;
+  String _phoneNumber = "";
+  String get phoneNumber => _phoneNumber;
   String _name = "";
   String get name => _name;
   String _email = "";
@@ -25,13 +26,13 @@ class TemporaryData extends ChangeNotifier {
   bool get theme => _theme;
 
   Future<void> retrieveData(id) async {
-    _uid = FirebaseAuth.instance.currentUser.uid;
-
     var _doc =
         await FirebaseFirestore.instance.collection("users").doc(id).get();
 
+    _uid = _doc.data()['uid'];
     _name = _doc.data()['name'];
     _email = _doc.data()['email'];
+    _phoneNumber = _doc.data()['phoneNumber'];
     _followers = _doc.data()['followers'];
     _accountName = _doc.data()['accountName'];
     _following = _doc.data()['following'];
@@ -42,6 +43,10 @@ class TemporaryData extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> cleanData() async {
+    _phoneNumber = "";
+    notifyListeners();
+  }
 // Search user follow unfollow
   // String? _followsuid = "";
   // String? get followsuid => _followsuid;

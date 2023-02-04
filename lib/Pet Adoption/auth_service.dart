@@ -11,8 +11,6 @@ import 'package:the_dog_project/Pet%20Adoption/theme.dart';
 String name;
 String uid;
 String email;
-String data;
-String profile;
 
 class AuthService {
 // keytool -exportcert -list -v -alias upload-keystore -keystore C:/Users/Acer/upload-keystore.jks
@@ -22,24 +20,19 @@ class AuthService {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            name = FirebaseAuth.instance.currentUser.displayName;
             uid = FirebaseAuth.instance.currentUser.uid;
             email = FirebaseAuth.instance.currentUser.email;
-            profile = FirebaseAuth.instance.currentUser.photoURL;
             context.read<TemporaryData>().retrieveData(uid);
 
 //new user
-            if (context.watch<TemporaryData>().name != name) {
+            if (context.watch<TemporaryData>().uid != uid) {
               FirebaseFirestore.instance.collection("users").doc(uid).set({
                 "uid": uid,
-                "name": name,
                 "email": email,
-                "accountName": name,
-                "theme": true,
+                "name": "",
+                "phoneNumber": "",
               });
               print('new user');
-            } else {
-              print('old user');
             }
 //old user
 
@@ -75,10 +68,8 @@ class AuthService {
   signOut() async {
     GoogleSignIn().disconnect();
     FirebaseAuth.instance.signOut();
-    String name = '';
-    String uid = '';
-    String data = '';
-    String email = '';
-    String profile = '';
+    name = '';
+    uid = '';
+    email = '';
   }
 }
