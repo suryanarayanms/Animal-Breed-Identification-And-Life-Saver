@@ -9,7 +9,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PostRequest extends StatefulWidget {
-  const PostRequest({Key key}) : super(key: key);
+  final String name;
+  final String phoneNumber;
+  const PostRequest({Key key, this.phoneNumber, this.name}) : super(key: key);
 
   @override
   State<PostRequest> createState() => PostRequestState();
@@ -729,6 +731,8 @@ class PostRequestState extends State<PostRequest> {
                                   "status": "pending",
                                   "latitude": position.latitude,
                                   "longitude": position.longitude,
+                                  "name": widget.name,
+                                  "phoneNumber": widget.phoneNumber
                                 });
                                 FirebaseFirestore.instance
                                     .collection("requests")
@@ -744,6 +748,7 @@ class PostRequestState extends State<PostRequest> {
                                   "status": "pending",
                                   "latitude": position.latitude,
                                   "longitude": position.longitude,
+                                  "phoneNumber": widget.phoneNumber
                                 });
                               }),
                               Navigator.pop(context)

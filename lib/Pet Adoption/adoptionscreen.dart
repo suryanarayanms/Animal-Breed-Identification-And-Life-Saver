@@ -47,6 +47,12 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   var note;
 
   var statusImage;
+
+  var handledby;
+
+  var handlerphoneNumber;
+
+  var reason;
   Future<void> retrieveData() async {
     number = context.watch<TemporaryData>().phoneNumber;
   }
@@ -58,7 +64,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    retrieveData();
+    // retrieveData();
     return (context.watch<TemporaryData>().phoneNumber == "")
         ? Scaffold(
             backgroundColor: Colors.grey[200],
@@ -445,10 +451,25 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
             floatingActionButton: Padding(
               padding: const EdgeInsets.all(25.0),
               child: FloatingActionButton(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                elevation: 50,
                 child: Icon(Icons.add_outlined),
                 onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PostRequest()))
+                  phoneNumber =
+                      Provider.of<TemporaryData>(context, listen: false)
+                          .phoneNumber,
+                  name =
+                      Provider.of<TemporaryData>(context, listen: false).name,
+
+                  // print(context.watch<TemporaryData>().name),
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PostRequest(
+                                name: name,
+                                phoneNumber: phoneNumber,
+                              )))
                 },
               ),
               // child: Container(
@@ -509,13 +530,13 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                             AuthService().signOut(),
 
                             // context.read<TemporaryData>().cleanData(),
-                            // Navigator.pushAndRemoveUntil(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (BuildContext context) => HomePage(),
-                            // ),
-                            // (route) => false,
-                            // )
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => HomePage(),
+                              ),
+                              (route) => false,
+                            )
                           },
                           child: Image.asset(
                             "assets/images/shutdown.png",
@@ -554,7 +575,10 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                   ? Colors.green
                                                   : doc['status'] == "active"
                                                       ? Colors.orange
-                                                      : Colors.white),
+                                                      : doc['status'] ==
+                                                              "rejected"
+                                                          ? Colors.red
+                                                          : Colors.white),
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 20.0,
@@ -568,37 +592,31 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                 Row(
                                                   children: [
                                                     Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10)),
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      color: doc['status'] ==
-                                                              "secured"
-                                                          ? Colors.white
-                                                          : doc['status'] ==
-                                                                  "active"
-                                                              ? Colors.white
-                                                              : Colors.blueGrey
-                                                                  .shade50,
-                                                      child: doc['status'] ==
-                                                              "secured"
-                                                          ? Image.network(
-                                                              doc['status_image'],
-                                                              width: 125,
-                                                              height: 125,
-                                                              fit: BoxFit.cover,
-                                                            )
-                                                          : Image.network(
-                                                              doc['image'],
-                                                              width: 125,
-                                                              height: 125,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                    ),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        color: doc['status'] ==
+                                                                "secured"
+                                                            ? Colors.white
+                                                            : doc['status'] ==
+                                                                    "active"
+                                                                ? Colors.white
+                                                                : doc['status'] ==
+                                                                        "rejected"
+                                                                    ? Colors.red
+                                                                    : Colors
+                                                                        .blueGrey
+                                                                        .shade50,
+                                                        child: Image.network(
+                                                          doc['image'],
+                                                          width: 125,
+                                                          height: 125,
+                                                          fit: BoxFit.cover,
+                                                        )),
                                                     Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -620,8 +638,12 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                               "active"
                                                                           ? Colors
                                                                               .white
-                                                                          : Colors
-                                                                              .black,
+                                                                          : doc['status'] ==
+                                                                                  "rejected"
+                                                                              ? Colors
+                                                                                  .white
+                                                                              : Colors
+                                                                                  .black,
                                                                   fontFamily:
                                                                       "BebasNeue",
                                                                   fontSize:
@@ -649,7 +671,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                         : doc['status'] ==
                                                                                 "active"
                                                                             ? Colors.white
-                                                                            : Colors.black,
+                                                                            : doc['status'] == "rejected"
+                                                                                ? Colors.white
+                                                                                : Colors.black,
                                                                     fontSize:
                                                                         20,
                                                                     fontFamily:
@@ -680,7 +704,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                         : doc['status'] ==
                                                                                 "active"
                                                                             ? Colors.white
-                                                                            : Colors.black,
+                                                                            : doc['status'] == "rejected"
+                                                                                ? Colors.white
+                                                                                : Colors.black,
                                                                     fontSize:
                                                                         20,
                                                                     fontFamily:
@@ -705,28 +731,44 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                     note = doc['note'],
                                                     statusImage =
                                                         doc['status_image'],
+                                                    phoneNumber =
+                                                        doc['phoneNumber'],
+                                                    handledby =
+                                                        doc['handledby'],
+                                                    handlerphoneNumber = doc[
+                                                        'handlerphoneNumber'],
+                                                    reason = doc['reason'],
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Viewrequest(
-                                                                    status:
-                                                                        status,
-                                                                    reqID:
-                                                                        reqID,
-                                                                    location:
-                                                                        location,
-                                                                    landmark:
-                                                                        landmark,
-                                                                    comment:
-                                                                        comment,
-                                                                    imageurl:
-                                                                        imageurl,
-                                                                    issue:
-                                                                        issue,
-                                                                    note: note,
-                                                                    statusImage:
-                                                                        statusImage)))
+                                                            builder:
+                                                                (context) =>
+                                                                    Viewrequest(
+                                                                      reason:
+                                                                          reason,
+                                                                      handledby:
+                                                                          handledby,
+                                                                      handlerphoneNumber:
+                                                                          handlerphoneNumber,
+                                                                      status:
+                                                                          status,
+                                                                      reqID:
+                                                                          reqID,
+                                                                      location:
+                                                                          location,
+                                                                      landmark:
+                                                                          landmark,
+                                                                      comment:
+                                                                          comment,
+                                                                      imageurl:
+                                                                          imageurl,
+                                                                      issue:
+                                                                          issue,
+                                                                      note:
+                                                                          note,
+                                                                      statusImage:
+                                                                          statusImage,
+                                                                    )))
                                                   },
                                                   child: Padding(
                                                     padding:
@@ -749,15 +791,22 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                       0.5)
                                                               : doc['status'] ==
                                                                       "active"
-                                                                  ? Color
-                                                                      .fromARGB(
+                                                                  ? Color.fromARGB(
+                                                                      255,
+                                                                      214,
+                                                                      135,
+                                                                      25)
+                                                                  : doc['status'] ==
+                                                                          "rejected"
+                                                                      ? Color.fromARGB(
                                                                           255,
-                                                                          214,
-                                                                          135,
-                                                                          25)
-                                                                  : Colors.grey
-                                                                      .withOpacity(
-                                                                          0.2)),
+                                                                          174,
+                                                                          60,
+                                                                          51)
+                                                                      : Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.2)),
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -773,7 +822,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                         ? Colors.white
                                                                         : doc['status'] == "active"
                                                                             ? Colors.white
-                                                                            : Colors.black,
+                                                                            : doc['status'] == "rejected"
+                                                                                ? Colors.white
+                                                                                : Colors.black,
                                                                     fontFamily: "BebasNeue",
                                                                     fontSize: 25)),
                                                             Icon(
@@ -787,8 +838,10 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                             "active"
                                                                         ? Colors
                                                                             .white
-                                                                        : Colors
-                                                                            .black,
+                                                                        : doc['status'] ==
+                                                                                "rejected"
+                                                                            ? Colors.white
+                                                                            : Colors.black,
                                                                 size: 40),
                                                           ],
                                                         ),

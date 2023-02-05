@@ -12,6 +12,10 @@ class Viewrequest extends StatefulWidget {
   final String status;
   final String note;
   final String statusImage;
+  final String phoneNumber;
+  final String handledby;
+  final String handlerphoneNumber;
+  final String reason;
   Viewrequest({
     Key key,
     this.reqID,
@@ -23,6 +27,10 @@ class Viewrequest extends StatefulWidget {
     this.status,
     this.note,
     this.statusImage,
+    this.phoneNumber,
+    this.handledby,
+    this.handlerphoneNumber,
+    this.reason,
   }) : super(key: key);
 
   @override
@@ -112,9 +120,68 @@ class _ViewrequestState extends State<Viewrequest> {
                           ),
                           cursorColor: Colors.black,
                           decoration: InputDecoration(
+                              hintMaxLines: 5,
                               enabled: false,
                               counterText: '',
-                              hintText: widget.note,
+                              hintText: "handled by:  " + widget.handledby,
+                              hintStyle: TextStyle(
+                                  fontFamily: "BebasNeue",
+                                  fontSize: 20,
+                                  color: Colors.black),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(12)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(12)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          autofocus: false,
+                          autocorrect: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "BebasNeue",
+                          ),
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              hintMaxLines: 5,
+                              enabled: false,
+                              counterText: '',
+                              hintText:
+                                  "contact:  " + widget.handlerphoneNumber,
+                              hintStyle: TextStyle(
+                                  fontFamily: "BebasNeue",
+                                  fontSize: 20,
+                                  color: Colors.black),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(12)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                  borderRadius: BorderRadius.circular(12)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          autofocus: false,
+                          autocorrect: false,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "BebasNeue",
+                          ),
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              enabled: false,
+                              counterText: '',
+                              hintText: "reason:  " + widget.reason,
                               hintStyle: TextStyle(
                                   fontFamily: "BebasNeue",
                                   fontSize: 20,
@@ -282,6 +349,187 @@ class _ViewrequestState extends State<Viewrequest> {
                         SizedBox(
                           height: 10,
                         ),
+                        widget.status == "active"
+                            ? Column(
+                                children: [
+                                  TextField(
+                                    autofocus: false,
+                                    autocorrect: false,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                    ),
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                        enabled: false,
+                                        counterText: '',
+                                        hintText:
+                                            "handled by:  " + widget.handledby,
+                                        hintStyle: TextStyle(
+                                            fontFamily: "BebasNeue",
+                                            fontSize: 20,
+                                            color: Colors.black),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    autocorrect: false,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                    ),
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                        enabled: false,
+                                        counterText: '',
+                                        hintText: "contact:  " +
+                                            widget.handlerphoneNumber,
+                                        hintStyle: TextStyle(
+                                            fontFamily: "BebasNeue",
+                                            fontSize: 20,
+                                            color: Colors.black),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  )
+                                ],
+                              )
+                            : Center(),
+                        widget.status == "rejected"
+                            ? Column(
+                                children: [
+                                  TextField(
+                                    autofocus: false,
+                                    autocorrect: false,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                    ),
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                        enabled: false,
+                                        counterText: '',
+                                        hintText:
+                                            "handled by:  " + widget.handledby,
+                                        hintStyle: TextStyle(
+                                            fontFamily: "BebasNeue",
+                                            fontSize: 20,
+                                            color: Colors.black),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    autocorrect: false,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                    ),
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                        enabled: false,
+                                        counterText: '',
+                                        hintText: "contact:  " +
+                                            widget.handlerphoneNumber,
+                                        hintStyle: TextStyle(
+                                            fontFamily: "BebasNeue",
+                                            fontSize: 20,
+                                            color: Colors.black),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    autocorrect: false,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "BebasNeue",
+                                    ),
+                                    cursorColor: Colors.black,
+                                    decoration: InputDecoration(
+                                        enabled: false,
+                                        counterText: '',
+                                        hintText: "reason:  " + widget.reason,
+                                        hintStyle: TextStyle(
+                                            fontFamily: "BebasNeue",
+                                            fontSize: 20,
+                                            color: Colors.black),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              )
+                            : Center(),
                       ])),
           widget.status == "pending"
               ? Center(
@@ -343,9 +591,7 @@ class _ViewrequestState extends State<Viewrequest> {
                 // widget.note != null ? widget.imageurl : widget.note,
                 // ),
                 child: Image.network(
-                  widget.status == "secured"
-                      ? widget.statusImage
-                      : widget.imageurl,
+                  widget.imageurl,
                   width: 215,
                   height: 170,
                   fit: BoxFit.cover,
