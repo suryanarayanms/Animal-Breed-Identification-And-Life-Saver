@@ -47,6 +47,7 @@ dependencies:
   url_launcher: 
   geolocator:
   geocoding:
+  flutter_phone_direct_caller:
 
 dev_dependencies:
   flutter_test:

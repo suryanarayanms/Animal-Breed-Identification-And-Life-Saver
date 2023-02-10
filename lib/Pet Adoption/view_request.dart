@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class Viewrequest extends StatefulWidget {
   final String reqID;
@@ -140,32 +141,37 @@ class _ViewrequestState extends State<Viewrequest> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextField(
-                          autofocus: false,
-                          autocorrect: false,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "BebasNeue",
+                        GestureDetector(
+                          onTap: () => {
+                            _callNumber(widget.handlerphoneNumber),
+                          },
+                          child: TextField(
+                            autofocus: false,
+                            autocorrect: false,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "BebasNeue",
+                            ),
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                                hintMaxLines: 5,
+                                enabled: false,
+                                counterText: '',
+                                hintText:
+                                    "contact:  " + widget.handlerphoneNumber,
+                                hintStyle: TextStyle(
+                                    fontFamily: "BebasNeue",
+                                    fontSize: 20,
+                                    color: Colors.black),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(12)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(12)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
                           ),
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              hintMaxLines: 5,
-                              enabled: false,
-                              counterText: '',
-                              hintText:
-                                  "contact:  " + widget.handlerphoneNumber,
-                              hintStyle: TextStyle(
-                                  fontFamily: "BebasNeue",
-                                  fontSize: 20,
-                                  color: Colors.black),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(12)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(12)),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
                         ),
                         SizedBox(
                           height: 10,
@@ -386,36 +392,41 @@ class _ViewrequestState extends State<Viewrequest> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  TextField(
-                                    autofocus: false,
-                                    autocorrect: false,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "BebasNeue",
+                                  GestureDetector(
+                                    onTap: () => {
+                                      _callNumber(widget.handlerphoneNumber),
+                                    },
+                                    child: TextField(
+                                      autofocus: false,
+                                      autocorrect: false,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "BebasNeue",
+                                      ),
+                                      cursorColor: Colors.black,
+                                      decoration: InputDecoration(
+                                          enabled: false,
+                                          counterText: '',
+                                          hintText: "contact:  " +
+                                              widget.handlerphoneNumber,
+                                          hintStyle: TextStyle(
+                                              fontFamily: "BebasNeue",
+                                              fontSize: 20,
+                                              color: Colors.black),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
                                     ),
-                                    cursorColor: Colors.black,
-                                    decoration: InputDecoration(
-                                        enabled: false,
-                                        counterText: '',
-                                        hintText: "contact:  " +
-                                            widget.handlerphoneNumber,
-                                        hintStyle: TextStyle(
-                                            fontFamily: "BebasNeue",
-                                            fontSize: 20,
-                                            color: Colors.black),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -460,36 +471,41 @@ class _ViewrequestState extends State<Viewrequest> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  TextField(
-                                    autofocus: false,
-                                    autocorrect: false,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "BebasNeue",
+                                  GestureDetector(
+                                    onTap: () => {
+                                      _callNumber(widget.handlerphoneNumber),
+                                    },
+                                    child: TextField(
+                                      autofocus: false,
+                                      autocorrect: false,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "BebasNeue",
+                                      ),
+                                      cursorColor: Colors.black,
+                                      decoration: InputDecoration(
+                                          enabled: false,
+                                          counterText: '',
+                                          hintText: "contact:  " +
+                                              widget.handlerphoneNumber,
+                                          hintStyle: TextStyle(
+                                              fontFamily: "BebasNeue",
+                                              fontSize: 20,
+                                              color: Colors.black),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
                                     ),
-                                    cursorColor: Colors.black,
-                                    decoration: InputDecoration(
-                                        enabled: false,
-                                        counterText: '',
-                                        hintText: "contact:  " +
-                                            widget.handlerphoneNumber,
-                                        hintStyle: TextStyle(
-                                            fontFamily: "BebasNeue",
-                                            fontSize: 20,
-                                            color: Colors.black),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -602,5 +618,9 @@ class _ViewrequestState extends State<Viewrequest> {
         ],
       ),
     );
+  }
+
+  _callNumber(a) async {
+    bool res = await FlutterPhoneDirectCaller.callNumber(a);
   }
 }
