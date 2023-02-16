@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         create: ((context) => TemporaryData()),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'The Dog Project',
+          title: 'The Pet Project',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),

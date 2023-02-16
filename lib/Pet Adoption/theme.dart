@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +42,13 @@ class TemporaryData extends ChangeNotifier {
     _bio = _doc.data()['bio'];
     _theme = _doc.data()['theme'];
 
+    notifyListeners();
+  }
+
+  File _image;
+  File get image => _image;
+  Future<void> imagepath(_image) async {
+    _image = _image;
     notifyListeners();
   }
 

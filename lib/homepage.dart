@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_dog_project/Animals/animals.dart';
 import 'package:the_dog_project/Breeds/breeds.dart';
 import 'package:the_dog_project/Pet%20Adoption/login_splash.dart';
 import 'package:the_dog_project/Pet%20Detection/breed_detection.dart';
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: 30.0),
                 child: Text(
-                  'The\ndog\nproject',
+                  'The\npet\nproject',
                   style: TextStyle(fontFamily: "BebasNeue", fontSize: 50),
                 ),
               ),
@@ -45,28 +46,67 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Total Breeds\navailable",
+                      const Text("what have\nwe got",
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: "BebasNeue",
                               fontSize: 25)),
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                          text: '120',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.8),
-                            fontSize: 90,
-                            fontFamily: "BebasNeue",
+                      Row(
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '3',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.8),
+                                    fontSize: 90,
+                                    fontFamily: "BebasNeue",
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ])),
+                          Column(
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: ' ',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontSize: 25,
+                                        fontFamily: "BebasNeue",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'pet animals',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontSize: 25,
+                                        fontFamily: "BebasNeue",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                       GestureDetector(
                         onTap: () => {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Breeds())))
+                                  builder: ((context) => Animals())))
                         },
                         child: Container(
                           // height: 30,
@@ -146,10 +186,10 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => {
                       // AuthService().signOut()
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => LoginSplashScreen()))),
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: ((context) => LoginSplashScreen()))),
                     },
                     child: Container(
                       height: 200,

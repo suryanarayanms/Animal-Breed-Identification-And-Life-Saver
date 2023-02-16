@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../classifier.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:the_dog_project/Pet%20Detection/cat_breed.dart';
+import 'package:the_dog_project/Pet%20Detection/cow_breed.dart';
+import 'package:the_dog_project/Pet%20Detection/dog_breed.dart';
+import 'package:the_dog_project/homepage.dart';
 
 class BreedDetection extends StatefulWidget {
   const BreedDetection({Key key}) : super(key: key);
@@ -14,261 +17,325 @@ class BreedDetection extends StatefulWidget {
 }
 
 class _BreedDetectionState extends State<BreedDetection> {
-  final Classifier classifier = Classifier();
+  bool _loading = true;
+  File _image;
+  List _output;
   final picker = ImagePicker();
-  String dogBreed = "";
-  String dogProb = "";
-  String url = "";
-  var image;
+  var path;
+
+  @override
+  void initState() {
+    super.initState();
+    loadModel().then((value) {
+      setState(() {});
+    });
+  }
+
+  detectImage(File image) async {
+    var output = await Tflite.runModelOnImage(
+        path: image.path,
+        numResults: 2,
+        threshold: 0.6,
+        imageMean: 127.5,
+        imageStd: 127.5);
+    setState(() {
+      _output = output;
+      _loading = false;
+    });
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+        model: 'assets/images/model_unquant.tflite',
+        labels: 'assets/images/labels.txt');
+  }
+
+  pickImage() async {
+    var image = await picker.pickImage(source: ImageSource.camera);
+    if (image == null) return null;
+
+    setState(() {
+      _image = File(image.path);
+    });
+    detectImage(_image);
+  }
+
+  pickGalleryImage() async {
+    var image = await picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return null;
+
+    setState(() {
+      _image = File(image.path);
+    });
+    detectImage(_image);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 75.0,
-              left: 30,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => {
-                      Navigator.pop(context),
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 40,
-                    ),
-                  ),
-                  const Text(
-                    "Know me",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 50,
-                        fontFamily: "BebasNeue"),
-                  )
-                ],
-              ),
-            ),
+      body: WillPopScope(
+        onWillPop: () => Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => HomePage(),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      image = await picker.pickImage(
-                          source: ImageSource.camera,
-                          maxHeight: 300,
-                          maxWidth: 300,
-                          imageQuality: 100);
-
-                      final outputs = await classifier.classifyImage(image);
-
-                      setState(() {
-                        dogBreed = outputs[0];
-                        dogProb = outputs[1];
-                      });
-                    },
-                    child: Container(
-                      height: 200,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Color.fromARGB(255, 162, 0, 255),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                text: 'Open',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 35,
-                                  fontFamily: "BebasNeue",
-                                ),
-                              ),
-                              TextSpan(
-                                text: '\ncamera',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 35,
-                                  fontFamily: "BebasNeue",
-                                ),
-                              ),
-                            ])),
-                            // child: Text(
-                            //   "OPEN\nCAMERA",
-                            // style: TextStyle(
-                            //   color: Colors.white,
-                            //   fontSize: 35,
-                            //   fontFamily: "BebasNeue",
-                            // ),
-                            // ),
+          (route) => false,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 75.0,
+                left: 30,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 30.0),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => HomePage(),
                           ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: Icon(
-                              Icons.camera_outlined,
-                              size: 55,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
+                          (route) => false,
+                        ),
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        size: 40,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      image = await picker.pickImage(
-                          source: ImageSource.gallery,
-                          maxHeight: 300,
-                          maxWidth: 300,
-                          imageQuality: 100);
-
-                      final outputs = await classifier.classifyImage(image);
-                      setState(() {
-                        dogBreed = outputs[0];
-                        dogProb = outputs[1];
-                      });
-                    },
-                    child: Container(
-                      height: 200,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.orange,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                text: 'Open',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 35,
-                                  fontFamily: "BebasNeue",
-                                ),
-                              ),
-                              TextSpan(
-                                text: '\ngallery',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 35,
-                                  fontFamily: "BebasNeue",
-                                ),
-                              ),
-                            ])),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: Icon(
-                              Icons.photo_size_select_actual,
-                              size: 55,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 60.0),
-            child: Center(
-              child: Text(
-                dogBreed == "" ? "" : "$dogProb% $dogBreed",
-                style: const TextStyle(
-                    color: Colors.green, fontSize: 35, fontFamily: "BebasNeue"),
+                    const Text(
+                      "Know me",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 50,
+                          fontFamily: "BebasNeue"),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40, top: 20),
-            child: Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: size.height / 4,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blueGrey.shade50,
-                    image: DecorationImage(
-                      image: dogBreed == ""
-                          ? AssetImage("assets/images/transparent.png")
-                          : FileImage(
-                              File(image.path),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        pickImage();
+                      },
+                      child: Container(
+                        height: 200,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Color.fromARGB(255, 162, 0, 255),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: 'Open',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 35,
+                                    fontFamily: "BebasNeue",
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '\ncamera',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.8),
+                                    fontSize: 35,
+                                    fontFamily: "BebasNeue",
+                                  ),
+                                ),
+                              ])),
+                              // child: Text(
+                              //   "OPEN\nCAMERA",
+                              // style: TextStyle(
+                              //   color: Colors.white,
+                              //   fontSize: 35,
+                              //   fontFamily: "BebasNeue",
+                              // ),
+                              // ),
                             ),
-                      fit: BoxFit.cover,
+                            Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: Icon(
+                                Icons.camera_outlined,
+                                size: 55,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(
-                  height: 30,
+                  width: 30,
                 ),
-                dogBreed != ""
-                    ? GestureDetector(
-                        onTap: () async {
-                          print('$dogBreed');
-                          url = "https://wikipedia.org/wiki/$dogBreed";
-                          // if (await canLaunch(url)) {
-                          launch(url,
-                              forceWebView: true, enableJavaScript: true);
-                          // }
-                        },
-                        child: Container(
-                          // height: 30,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.white),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10.0, top: 10, bottom: 10),
-                            child: Row(
-                              children: const [
-                                Text("click here to know more",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "BebasNeue",
-                                        fontSize: 25)),
-                                Icon(Icons.keyboard_arrow_right_outlined,
-                                    color: Colors.white, size: 40),
-                              ],
-                            ),
-                          ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        pickGalleryImage();
+                      },
+                      child: Container(
+                        height: 200,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.orange,
                         ),
-                      )
-                    : Container(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: 'Open',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 35,
+                                    fontFamily: "BebasNeue",
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '\ngallery',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.8),
+                                    fontSize: 35,
+                                    fontFamily: "BebasNeue",
+                                  ),
+                                ),
+                              ])),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: Icon(
+                                Icons.photo_size_select_actual,
+                                size: 55,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                child: Text(
+                  _loading ? '' : 'It is a ${_output[0]['label']}',
+                  style: const TextStyle(
+                      color: Colors.green,
+                      fontSize: 35,
+                      fontFamily: "BebasNeue"),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40, right: 40, top: 20),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: size.height / 4,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.blueGrey.shade50,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: _loading
+                              ? AssetImage("assets/images/transparent.png")
+                              : FileImage(
+                                  _image,
+                                  // width: 160,
+                                  // height: 160,
+                                  // fit: BoxFit.cover,
+                                )
+                          // fit: BoxFit.cover,
+                          ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _loading == false
+                      ? GestureDetector(
+                          onTap: () {
+                            if (_output[0]['label'] == 'Dog') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DogBreed(_image)));
+                            } else if (_output[0]['label'] == 'Cat') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CatBreed(_image)));
+                            } else if (_output[0]['label'] == 'Cow') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CowBreed(_image)));
+                            }
+                            // print('confidence:  ');
+                            // print(_output[0]['confidence']);
+                          },
+                          child: Container(
+                            // height: 30,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, top: 10, bottom: 10),
+                              child: Row(
+                                children: const [
+                                  Text("click here to find it's breed",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "BebasNeue",
+                                          fontSize: 25)),
+                                  Icon(Icons.keyboard_arrow_right_outlined,
+                                      color: Colors.white, size: 40),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
