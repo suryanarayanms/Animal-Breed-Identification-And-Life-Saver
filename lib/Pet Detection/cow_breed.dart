@@ -20,7 +20,7 @@ class _CowBreedState extends State<CowBreed> {
   bool _loading = true;
   File _image;
   List _output;
-
+  double probability;
   @override
   void initState() {
     super.initState();
@@ -39,6 +39,8 @@ class _CowBreedState extends State<CowBreed> {
     setState(() {
       _output = output;
       _loading = false;
+      probability =
+          double.parse((_output[0]['confidence'] * 100).toStringAsFixed(2));
     });
   }
 
@@ -114,7 +116,7 @@ class _CowBreedState extends State<CowBreed> {
                     child: Text(
                       _loading
                           ? 'TAKE A PHOTO'
-                          : 'It is a ${_output[0]['label']}',
+                          : 'It is $probability% a ${_output[0]['label']}',
                       style: const TextStyle(
                           color: Colors.green,
                           fontSize: 35,

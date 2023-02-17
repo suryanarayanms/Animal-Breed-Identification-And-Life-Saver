@@ -1,2 +1,11 @@
-Cheems
-Lab
+Chihuahua
+Shih-Tzu
+Afghan Hound
+Beagle
+Scottish Deerhound
+Tibetan Terrier
+Golden Retriever
+Labrador Retriever
+Rottweiler
+Doberman
+Boxer

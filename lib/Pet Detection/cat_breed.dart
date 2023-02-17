@@ -21,6 +21,8 @@ class _CatBreedState extends State<CatBreed> {
   File _image;
   List _output;
 
+  double probability;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,8 @@ class _CatBreedState extends State<CatBreed> {
     setState(() {
       _output = output;
       _loading = false;
+      probability =
+          double.parse((_output[0]['confidence'] * 100).toStringAsFixed(2));
     });
   }
 
@@ -114,7 +118,7 @@ class _CatBreedState extends State<CatBreed> {
                     child: Text(
                       _loading
                           ? 'TAKE A PHOTO'
-                          : 'It is a ${_output[0]['label']}',
+                          : 'It is $probability% a ${_output[0]['label']}',
                       style: const TextStyle(
                           color: Colors.green,
                           fontSize: 35,

@@ -21,6 +21,8 @@ class _DogBreedState extends State<DogBreed> {
   File _image;
   List _output;
 
+  double probability;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,8 @@ class _DogBreedState extends State<DogBreed> {
     setState(() {
       _output = output;
       _loading = false;
+      probability =
+          double.parse((_output[0]['confidence'] * 100).toStringAsFixed(2));
     });
   }
 
@@ -59,6 +63,7 @@ class _DogBreedState extends State<DogBreed> {
     {
       _image = widget._image;
       detectImage(_image);
+
       Size size = MediaQuery.of(context).size;
       return Scaffold(
         backgroundColor: Colors.grey[200],
@@ -114,7 +119,9 @@ class _DogBreedState extends State<DogBreed> {
                     child: Text(
                       _loading
                           ? 'loading...'
-                          : 'It is a ${_output[0]['label']}',
+                          : probability != ''
+                              ? 'It is $probability% a ${_output[0]['label']}'
+                              : 's',
                       style: const TextStyle(
                           color: Colors.green,
                           fontSize: 35,
@@ -152,6 +159,7 @@ class _DogBreedState extends State<DogBreed> {
                       _loading == false
                           ? GestureDetector(
                               onTap: () {
+                                print('$probability ++++++++++');
                                 var breed = _output[0]['label'];
                                 var url = "https://wikipedia.org/wiki/$breed";
                                 // if (await canLaunch(url)) {
