@@ -63,6 +63,7 @@ class _CatBreedState extends State<CatBreed> {
     {
       _image = widget._image;
       detectImage(_image);
+
       Size size = MediaQuery.of(context).size;
       return Scaffold(
         backgroundColor: Colors.grey[200],
@@ -102,7 +103,7 @@ class _CatBreedState extends State<CatBreed> {
                           ),
                         ),
                         const Text(
-                          "cat breed",
+                          "Cat breed",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 50,
@@ -117,8 +118,10 @@ class _CatBreedState extends State<CatBreed> {
                   child: Center(
                     child: Text(
                       _loading
-                          ? 'TAKE A PHOTO'
-                          : 'It is $probability% a ${_output[0]['label']}',
+                          ? 'loading...'
+                          : probability != ''
+                              ? 'It is $probability% a ${_output[0]['label']}'
+                              : 's',
                       style: const TextStyle(
                           color: Colors.green,
                           fontSize: 35,
@@ -173,7 +176,7 @@ class _CatBreedState extends State<CatBreed> {
                                       left: 10.0, top: 10, bottom: 10),
                                   child: Row(
                                     children: const [
-                                      Text("click here to find it's breed",
+                                      Text("click here to know more",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: "BebasNeue",

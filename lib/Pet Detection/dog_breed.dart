@@ -159,7 +159,6 @@ class _DogBreedState extends State<DogBreed> {
                       _loading == false
                           ? GestureDetector(
                               onTap: () {
-                                print('$probability ++++++++++');
                                 var breed = _output[0]['label'];
                                 var url = "https://wikipedia.org/wiki/$breed";
                                 // if (await canLaunch(url)) {
