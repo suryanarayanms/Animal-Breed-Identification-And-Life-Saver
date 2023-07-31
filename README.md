@@ -3,7 +3,7 @@
 _Final year project - Animal - Breed Identification and Life Saver_
 
 ## What does this do
-The Animal - breed Identification and Life Saver is a user-friendly Mobile Application that provides an interface for identifying the animal and its breed and also it helps in saving the abandoned / injured animals that met with an accident.
+The Animal - breed Identification and Life Saver is a user-friendly Mobile Application that provides an interface for identifying the animal and its breed and also it helps in saving the abandoned / injured animals that met with an accident. The Blue cross team or the nearby organization will be notified by the user and the process taken to save the animal will be updated to the user application by the admin.
 
 
 ### Dependencies used for Animal - Breed Identification
