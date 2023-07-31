@@ -1,9 +1,9 @@
-# The Dog Project
+# Animal and Breed Identification and Life Saver 
 
-_Final year project - Dog Breed identifier and Dog Adoption/Geo Tracking_
+_Final year project - Animal and Breed Identification and Life Saver_
 
 
-### Dependencies used for Dog Breed Identification
+### Dependencies used for Animal and Breed Identification
 
 ```bash
 image_picker: 
@@ -15,7 +15,7 @@ tflite_flutter_helper:
 ### DataSet 
 
 ```bash
-The dataset used to train the model was the Stanford Dogs Dataset which contains 20,580 images with a total of 120 dog breeds.
+The dataset used to train the model was from kaggle which contains 20,580 images.
 ```
 
 
@@ -24,16 +24,12 @@ The dataset used to train the model was the Stanford Dogs Dataset which contains
 ```bash
 The tflite models are the following:
 
-b3_acc_73_9.tflite
-b3_acc_81_3.tflite
-b3_acc_83_7.tflite
-b3_acc_86_7.tflite ( is used )
+The models are trained using teachable machine.
 ```
 
 
 ### ToDo's
 
-```bash
-Pet adoption module
+```
 Geo Tracking module
 ```
